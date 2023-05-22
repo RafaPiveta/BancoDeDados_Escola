@@ -4,10 +4,10 @@ use ESCOLA;
 
 create table TBMATERIA(
 	codigo_materia int,
-    carga_horaria_materia int,
-    nome_materia varchar (50),
-    codigo_serie int,
-    primary key (codigo_materia));
+	carga_horaria_materia int,
+	nome_materia varchar (50),
+	codigo_serie int,
+	primary key (codigo_materia));
     
 insert into TBMATERIA values (1, 120, "Matemática", 1);
 insert into TBMATERIA values (2, 120, "Português", 1);
@@ -20,10 +20,10 @@ insert into TBMATERIA values (8, 40, "Filosofia", 1);
     
 create table TBTURMA(
 	codigo_turma int,
-    serie_turma int,
-    horario_turma time,
-    nome_turma varchar (50),
-    primary key (codigo_turma));
+	serie_turma int,
+	horario_turma time,
+	nome_turma varchar (50),
+	primary key (codigo_turma));
     
 insert into TBTURMA values (1, 1, "07:50:00", "Feynman");
 insert into TBTURMA values (2, 1, "18:15:00", "Farenheit");
@@ -37,8 +37,8 @@ insert into TBTURMA values (8, 1, "18:15:00", "Tesla");
 create table TBUF(
 	codigo_uf int,
 	UF_endereco char (2),
-    cidade_UF varchar (100),
-    primary key (codigo_uf));
+	cidade_UF varchar (100),
+	primary key (codigo_uf));
     
 insert into TBUF values (1, "PR", "Curitiba");
 insert into TBUF values (2, "PR", "São José dos Pinhais");
@@ -55,13 +55,13 @@ insert into TBUF values (12, "PR", "Cascavel");
 
 create table TBENDERECO(
 	codigo_uf int,
-    codigo_cidade_endereco int,
+	codigo_cidade_endereco int,
 	rua_endereco varchar (100),
-    numero_endereco varchar (20),
-    complemento_endereco varchar (100),
-    CEP_endereco char (8),
-    primary key (codigo_cidade_endereco),
-    foreign key (codigo_uf) references TBUF (codigo_uf));
+	numero_endereco varchar (20),
+	complemento_endereco varchar (100),
+	CEP_endereco char (8),
+	primary key (codigo_cidade_endereco),
+	foreign key (codigo_uf) references TBUF (codigo_uf));
 
 insert into TBENDERECO values (1,1, "Rua Lima", "1", "A", "11111111");
 insert into TBENDERECO values (2,2, "Rua Laranja", "2", "B", "22222222");
@@ -86,12 +86,12 @@ insert into TBENDERECO values (8,20, "Rua Pêssego", "20", "D", "00000001");
 
 create table TBRESPONSAVEL(
 	codigo_responsavel int,
-    codigo_cidade_endereco int,
-    nome_responsavel varchar (100),
-    email_responsavel varchar (50),
-    CPF_responsavel char (11),
-    primary key (codigo_responsavel),
-    foreign key (codigo_cidade_endereco) references TBENDERECO (codigo_cidade_endereco));
+	codigo_cidade_endereco int,
+	nome_responsavel varchar (100),
+	email_responsavel varchar (50),
+	CPF_responsavel char (11),
+	primary key (codigo_responsavel),
+	foreign key (codigo_cidade_endereco) references TBENDERECO (codigo_cidade_endereco));
     
 insert into TBRESPONSAVEL values (1, 1, "Rafael", "rafael@hotmail.com", "11111111111");
 insert into TBRESPONSAVEL values (2, 2, "Rodrigo", "rodrigo@hotmail.com", "22222222222");    
@@ -111,9 +111,9 @@ insert into TBRESPONSAVEL values (15, 15, "Noah", "noah@hotmail.com", "050050050
     
 create table TBTELEFONERESPONSAVEL(
 	numero_telefone char (15),
-    codigo_responsavel int,
+	codigo_responsavel int,
 	primary key (numero_telefone, codigo_responsavel),
-    foreign key (codigo_responsavel) references TBRESPONSAVEL (codigo_responsavel));
+	foreign key (codigo_responsavel) references TBRESPONSAVEL (codigo_responsavel));
     
 insert into TBTELEFONERESPONSAVEL values ("+55041911111111", 1);
 insert into TBTELEFONERESPONSAVEL values ("+55041922222222", 2);
@@ -133,12 +133,12 @@ insert into TBTELEFONERESPONSAVEL values ("+55041906600660", 15);
     
 create table TBSEDE(
 	nome_sede varchar (100),
-    codigo_cidade_endereco int,
+	codigo_cidade_endereco int,
 	codigo_sede int,
-    email_sede varchar (50),
-    numero_telefone_sede char (15),
-    primary key (nome_sede),
-    foreign key (codigo_cidade_endereco) references TBENDERECO (codigo_cidade_endereco));
+	email_sede varchar (50),
+	numero_telefone_sede char (15),
+	primary key (nome_sede),
+	foreign key (codigo_cidade_endereco) references TBENDERECO (codigo_cidade_endereco));
     
 insert into TBSEDE values ("Positivo Batel", 1, 1, "positivobatel@hotmail.com", "+55041911111111");    
 insert into TBSEDE values ("Positivo Água Verde", 2, 2, "positivoaguaverde@hotmail.com", "+55041922222222");     
@@ -147,8 +147,8 @@ insert into TBSEDE values ("Positivo Portão", 4, 4, "positivoportao@hotmail.com
 
 create table TBBOLSA_ALUNO(
 	codigo_bolsa int,
-    descricao_bolsa varchar (50),
-    primary key (codigo_bolsa));
+	descricao_bolsa varchar (50),
+	primary key (codigo_bolsa));
 
 insert into TBBOLSA_ALUNO values(1, "ProUni");
 insert into TBBOLSA_ALUNO values(2, "Credies");
@@ -156,19 +156,19 @@ insert into TBBOLSA_ALUNO values(2, "Credies");
 create table TBALUNO(
 	codigo_responsavel int,
 	matricula_aluno int,
-    codigo_turma int,
-    nome_sede varchar (100),
-    nome_aluno varchar (100),
-    data_nascimento_aluno date,
-    serie_aluno int,
-    CPF_aluno char (11),
-    codigo_cidade_endereco int,
-    codigo_bolsa int,
-    primary key (matricula_aluno),
-    foreign key (codigo_responsavel) references TBRESPONSAVEL (codigo_responsavel),
-    foreign key (codigo_turma) references TBTURMA (codigo_turma),
-    foreign key (nome_sede) references TBSEDE (nome_sede),
-    foreign key (codigo_cidade_endereco) references TBENDERECO (codigo_cidade_endereco),
+	codigo_turma int,
+	nome_sede varchar (100),
+	nome_aluno varchar (100),
+	data_nascimento_aluno date,
+	serie_aluno int,
+	CPF_aluno char (11),
+	codigo_cidade_endereco int,
+	codigo_bolsa int,
+	primary key (matricula_aluno),
+	foreign key (codigo_responsavel) references TBRESPONSAVEL (codigo_responsavel),
+	foreign key (codigo_turma) references TBTURMA (codigo_turma),
+	foreign key (nome_sede) references TBSEDE (nome_sede),
+	foreign key (codigo_cidade_endereco) references TBENDERECO (codigo_cidade_endereco),
 	foreign key (codigo_bolsa) references TBBOLSA_ALUNO (codigo_bolsa));
 
 insert into TBALUNO values (1, 1, 1, "Positivo Batel", "Arthur", "2001-01-01", 1, "11111111111", 1, 1);
@@ -190,11 +190,11 @@ insert into TBALUNO values (11, 16, 8, "Positivo Água Verde", "Franciele", "200
 
 create table TBHISTORICO(
 	matricula_aluno int,
-    nota_historico int,
-    ano_nota_historico year,
-    nome_instituicao varchar (100),
-    primary key (matricula_aluno, nota_historico, ano_nota_historico),
-    foreign key (matricula_aluno) references TBALUNO (matricula_aluno));
+	nota_historico int,
+	ano_nota_historico year,
+	nome_instituicao varchar (100),
+	primary key (matricula_aluno, nota_historico, ano_nota_historico),
+	foreign key (matricula_aluno) references TBALUNO (matricula_aluno));
     
 insert into TBHISTORICO values (1, 10, 2011, "Expoente Batel");
 insert into TBHISTORICO values (2, 9, 2012, "Expoente Batel");
@@ -215,13 +215,13 @@ insert into TBHISTORICO values (16, 8, 2014, "Expoente Portão");
 
 create table TBMATERIA_ALUNO_NOTAS(
 	matricula_aluno int,
-    codigo_materia int,
-    ano_nota_aluno_materia year,
-    nota_aluno_materia float,
-    frequencia int,
-    primary key (matricula_aluno, codigo_materia, ano_nota_aluno_materia),
-    foreign key (matricula_aluno) references TBALUNO (matricula_aluno),
-    foreign key (codigo_materia) references TBMATERIA (codigo_materia));
+	codigo_materia int,
+	ano_nota_aluno_materia year,
+	nota_aluno_materia float,
+	frequencia int,
+	primary key (matricula_aluno, codigo_materia, ano_nota_aluno_materia),
+	foreign key (matricula_aluno) references TBALUNO (matricula_aluno),
+	foreign key (codigo_materia) references TBMATERIA (codigo_materia));
     
 insert into TBMATERIA_ALUNO_NOTAS values (1,1,2021,10,80);
 insert into TBMATERIA_ALUNO_NOTAS values (1,2,2021,10,80);
@@ -354,25 +354,25 @@ insert into TBMATERIA_ALUNO_NOTAS values (16,8,2021,10,80);
 
 create table TBESTAGIARIO_PROFESSOR(
 	codigo_estagiario_professor int,
-    descricao_estagiario_professor varchar(50),
-    primary key (codigo_estagiario_professor));
+	descricao_estagiario_professor varchar(50),
+	primary key (codigo_estagiario_professor));
 
 insert into TBESTAGIARIO_PROFESSOR values (1,"Iniciante");
 insert into TBESTAGIARIO_PROFESSOR values (2,"Pré-Efetivação");
 
 create table TBPROFESSOR(
 	matricula_professor int,
-    nome_sede varchar (100),
-    nome_professor varchar (100),
-    CPF_professor char (11),
-    numero_telefone_professor char (15),
-    codigo_cidade_endereco int,
-    email_professor varchar (50),
-    codigo_estagiario_professor int,
-    primary key (matricula_professor),
-    foreign key (nome_sede) references TBSEDE (nome_sede),
-    foreign key (codigo_cidade_endereco) references TBENDERECO (codigo_cidade_endereco),
-    foreign key (codigo_estagiario_professor) references TBESTAGIARIO_PROFESSOR (codigo_estagiario_professor));
+	nome_sede varchar (100),
+	nome_professor varchar (100),
+	CPF_professor char (11),
+	numero_telefone_professor char (15),
+	codigo_cidade_endereco int,
+	email_professor varchar (50),
+	codigo_estagiario_professor int,
+	primary key (matricula_professor),
+	foreign key (nome_sede) references TBSEDE (nome_sede),
+	foreign key (codigo_cidade_endereco) references TBENDERECO (codigo_cidade_endereco),
+	foreign key (codigo_estagiario_professor) references TBESTAGIARIO_PROFESSOR (codigo_estagiario_professor));
     
 insert into TBPROFESSOR values (1, "Positivo Batel", "Daniel", "11111111111", "+55041911111111", 1, "daniel@hotmail.com",1);
 insert into TBPROFESSOR values (2, "Positivo Água Verde", "Douglas", "22222222222","+55041922222222", 2, "douglas@hotmail.com",null);
@@ -386,24 +386,24 @@ insert into TBPROFESSOR values (8, "Positivo Batel", "Anthony", "44444444444", "
 create table TBESTAGIARIO_FUNCIONARIO(
 	codigo_estagiario_funcionario int,
 	descricao_estagiario_funcionario varchar (50),
-    primary key (codigo_estagiario_funcionario));
+	primary key (codigo_estagiario_funcionario));
    
 insert into TBESTAGIARIO_FUNCIONARIO values (1,"Iniciante");
 insert into TBESTAGIARIO_FUNCIONARIO values (2,"Pré-efetivação");    
 
 create table TBFUNCIONARIOS(
 	matricula_funcionario int,
-    nome_sede varchar (100),
-    nome_funcionario varchar (100),
-    CPF_funcionario char (11),
-    numero_telefone_funcionario char (15),
-    codigo_cidade_endereco int,
-    email_funcionario varchar (50),
-    codigo_estagiario_funcionario int,
-    primary key (matricula_funcionario),
-    foreign key (nome_sede) references TBSEDE (nome_sede),
-    foreign key (codigo_cidade_endereco) references TBENDERECO (codigo_cidade_endereco),
-    foreign key (codigo_estagiario_funcionario) references TBESTAGIARIO_FUNCIONARIO (codigo_estagiario_funcionario));
+	nome_sede varchar (100),
+	nome_funcionario varchar (100),
+	CPF_funcionario char (11),
+	numero_telefone_funcionario char (15),
+	codigo_cidade_endereco int,
+	email_funcionario varchar (50),
+	codigo_estagiario_funcionario int,
+	primary key (matricula_funcionario),
+	foreign key (nome_sede) references TBSEDE (nome_sede),
+	foreign key (codigo_cidade_endereco) references TBENDERECO (codigo_cidade_endereco),
+	foreign key (codigo_estagiario_funcionario) references TBESTAGIARIO_FUNCIONARIO (codigo_estagiario_funcionario));
 
 insert into TBFUNCIONARIOS values (1, "Positivo Batel", "Matheus", "11111111111", "+55041911111111", 1, "matheus@hotmail.com",1);    
 insert into TBFUNCIONARIOS values (2, "Positivo Batel", "Murilo", "22222222222", "+55041922222222", 2, "murilo@hotmail.com",null);  
@@ -416,8 +416,8 @@ insert into TBFUNCIONARIOS values (8, "Positivo Portão", "Cleimar", "8888888888
 
 create table TBSALARIO_PROFESSORES(
 	codigo_salario int,
-    valor_salario float,
-    primary key (codigo_salario));
+	valor_salario float,
+	primary key (codigo_salario));
     
 insert into TBSALARIO_PROFESSORES values (1, 1000.00);
 insert into TBSALARIO_PROFESSORES values (2, 2000.00);   
@@ -430,10 +430,10 @@ insert into TBSALARIO_PROFESSORES values (8, 7800.00);
     
 create table TBRECEBE_SALARIO_PROFESSORES(
 	codigo_salario int,
-    matricula_professor int,
-    data_pagamento_salario datetime,
-    primary key (codigo_salario, matricula_professor),
-    foreign key (matricula_professor) references TBPROFESSOR (matricula_professor));
+	matricula_professor int,
+	data_pagamento_salario datetime,
+	primary key (codigo_salario, matricula_professor),
+	foreign key (matricula_professor) references TBPROFESSOR (matricula_professor));
     
 insert into TBRECEBE_SALARIO_PROFESSORES values (1, 1, "2020-01-10 07:50:00");
 insert into TBRECEBE_SALARIO_PROFESSORES values (3, 3, "2023-01-10 07:50:00");
@@ -444,8 +444,8 @@ insert into TBRECEBE_SALARIO_PROFESSORES values (8, 8, "2024-01-10 07:50:00");
     
 create table TBSALARIO_FUNCIONARIOS(
 	codigo_salario int,
-    valor_salario float,
-    primary key (codigo_salario));
+	valor_salario float,
+	primary key (codigo_salario));
     
 insert into TBSALARIO_FUNCIONARIOS values (1, 3000.00);
 insert into TBSALARIO_FUNCIONARIOS values (2, 2000.00);
@@ -458,10 +458,10 @@ insert into TBSALARIO_FUNCIONARIOS values (8, 800.00);
     
 create table TBRECEBE_SALARIO_FUNCIONARIOS(
 	codigo_salario int,
-    matricula_funcionario int,
-    data_pagamento_salario datetime,
-    primary key (codigo_salario, matricula_funcionario),
-    foreign key (matricula_funcionario) references TBFUNCIONARIOS (matricula_funcionario));
+	matricula_funcionario int,
+	data_pagamento_salario datetime,
+	primary key (codigo_salario, matricula_funcionario),
+	foreign key (matricula_funcionario) references TBFUNCIONARIOS (matricula_funcionario));
     
 insert into TBRECEBE_SALARIO_FUNCIONARIOS values (1, 1, "2020-01-01 07:50:00");
 insert into TBRECEBE_SALARIO_FUNCIONARIOS values (4, 4, "2024-01-04 07:50:00");
@@ -471,10 +471,10 @@ insert into TBRECEBE_SALARIO_FUNCIONARIOS values (7, 7, "2023-01-03 07:50:00");
 insert into TBRECEBE_SALARIO_FUNCIONARIOS values (8, 8, "2024-01-04 07:50:00");      
 
 create table TBPAGAMENTO_MENSALIDADE(
-    codigo_pagamento_mensalidade int,
-    valor_mensalidade float,
-    primary key (codigo_pagamento_mensalidade));
-    
+	codigo_pagamento_mensalidade int,
+	valor_mensalidade float,
+	primary key (codigo_pagamento_mensalidade));
+
 insert into TBPAGAMENTO_MENSALIDADE values (1, 1000.00);
 insert into TBPAGAMENTO_MENSALIDADE values (2, 2000.00);  
 insert into TBPAGAMENTO_MENSALIDADE values (3, 3000.00);  
@@ -494,11 +494,11 @@ insert into TBPAGAMENTO_MENSALIDADE values (16, 4000.00);
     
 create table TBREALIZA_PAGAMENTO_MENSALIDADE(
 	matricula_aluno int,
-    codigo_pagamento_mensalidade int,
-    data_pagamento_mensalidade datetime,
-    primary key (matricula_aluno, codigo_pagamento_mensalidade),
-    foreign key (matricula_aluno) references TBALUNO (matricula_aluno),
-    foreign key (codigo_pagamento_mensalidade) references TBPAGAMENTO_MENSALIDADE (codigo_pagamento_mensalidade));
+	codigo_pagamento_mensalidade int,
+	data_pagamento_mensalidade datetime,
+	primary key (matricula_aluno, codigo_pagamento_mensalidade),
+	foreign key (matricula_aluno) references TBALUNO (matricula_aluno),
+	foreign key (codigo_pagamento_mensalidade) references TBPAGAMENTO_MENSALIDADE (codigo_pagamento_mensalidade));
     
 insert into TBREALIZA_PAGAMENTO_MENSALIDADE values (1, 1, "2022-01-10 07:50:00");
 insert into TBREALIZA_PAGAMENTO_MENSALIDADE values (2, 2, "2022-01-05 18:00:00");
@@ -515,10 +515,10 @@ insert into TBREALIZA_PAGAMENTO_MENSALIDADE values (12, 12, "2022-01-01 18:00:00
 
 create table TBLECIONADA_MATERIA_PROFESSOR(
 	codigo_materia int,
-    matricula_professor int,
-    primary key (codigo_materia, matricula_professor),
-    foreign key (codigo_materia) references TBMATERIA (codigo_materia),
-    foreign key (matricula_professor) references TBPROFESSOR (matricula_professor));
+	matricula_professor int,
+	primary key (codigo_materia, matricula_professor),
+	foreign key (codigo_materia) references TBMATERIA (codigo_materia),
+	foreign key (matricula_professor) references TBPROFESSOR (matricula_professor));
     
 insert into TBLECIONADA_MATERIA_PROFESSOR values (1,1);
 insert into TBLECIONADA_MATERIA_PROFESSOR values (2,2);
@@ -532,10 +532,10 @@ insert into TBLECIONADA_MATERIA_PROFESSOR values (8,8);
 create table TBPOSSUI_MATERIA_TURMA(
 	codigo_materia int,
 	codigo_turma int,
-    primary key (codigo_materia, codigo_turma),
-    foreign key (codigo_materia) references TBMATERIA (codigo_materia),
-    foreign key (codigo_turma) references TBTURMA (codigo_turma));
-    
+	primary key (codigo_materia, codigo_turma),
+	foreign key (codigo_materia) references TBMATERIA (codigo_materia),
+	foreign key (codigo_turma) references TBTURMA (codigo_turma));
+
 insert into TBPOSSUI_MATERIA_TURMA values (1,1);
 insert into TBPOSSUI_MATERIA_TURMA values (2,2);
 insert into TBPOSSUI_MATERIA_TURMA values (3,3);
