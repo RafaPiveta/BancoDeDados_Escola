@@ -1,3 +1,6 @@
+-- Aluno: Rafael Olivare Piveta
+-- Curso: Engenharia da Computação
+
 drop database if exists ESCOLA;
 create database ESCOLA;
 use ESCOLA;
